@@ -1,2 +1,3 @@
-
-<h2><?php echo 'hello world';?></h2>
+<?php
+ini_set('display_errors', 1);
+require_once 'application/bootstrap.php';
