@@ -3,7 +3,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="text-center">Увійти до свого акаунту</h3>
+                    <h3 class="text-center">Реєстрація на сайті</h3>
                 </div>
                 <div class="card-body">
                     <form action="" method="post">
@@ -15,7 +15,11 @@
                             <label for="password">Пароль</label>
                             <input type="password" class="form-control" id="password" name="password" placeholder="Введіть пароль">
                         </div>
-                        <button type="submit" name='btn' class="btn btn-primary btn-block">Увійти</button>
+<!--                        <div class="form-group">-->
+<!--                            <label for="confirm-password">Підтвердження пароля</label>-->
+<!--                            <input type="password" class="form-control" id="confirm-password" name="confirm-password" placeholder="Підтвердьте пароль">-->
+<!--                        </div>-->
+                        <button type="submit" name='btn' class="btn btn-primary btn-block"  >Зареєструватись</button>
                     </form>
                 </div>
             </div>
@@ -24,9 +28,10 @@
 </div>
 
 <?php if($data){ extract($data); ?>
-<?php if($is_logined  == true){ ?>
-        <p style="color:green">Авторизація пройшла успішно.</p>
-    <?php } elseif($is_logined == false) { ?>
-        <p style="color:red">Логін і/чи пароль були введені не вірно.</p>
-    <?php
-}} ?>
+    <?php if($is_register  == true){ ?>
+        <p style="color:green">Ви успішно зареєструвались.</p>
+    <?php } elseif($is_register == false) { ?>
+        <p style="color:red">Щось пішло не так.</p>
+        <?php
+
+    }} ?>
