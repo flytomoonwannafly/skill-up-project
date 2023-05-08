@@ -1,6 +1,4 @@
 <?php
-require_once 'core/model.php';
-require_once 'core/view.php';
-require_once 'core/controller.php';
-require_once 'core/route.php';
-Route::start();
+require_once('vendor/autoload.php');
+$route = new \Application\Core\Route();
+$route->start();

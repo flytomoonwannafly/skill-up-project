@@ -1,0 +1,9 @@
+<?php
+
+namespace Application\Config;
+
+define('HOST',  'server_name' );
+define('USER', 'user_name');
+define('PASS', 'your_password');
+define('DBNAME', 'db_name');
+?>
