@@ -1,13 +1,16 @@
 <?php
 namespace Application\Core;
 
+use Application\Controller\Controller404;
+use Application\Controller\ControllerApplication;
+
 class Route
 {
 
     static function start()
     {
         // контроллер и действие по умолчанию
-        $controller_name = 'Main';
+        $controller_name = 'Application';
         $action_name = 'index';
 
         $routes = explode('/', $_SERVER['REQUEST_URI']);
@@ -55,6 +58,12 @@ class Route
 
         // создаем контроллер
         $class = '\Application\Controller\\'.$controller_name;
+        if(!class_exists($class)){
+            $class = new ControllerApplication();
+            $class->wrong_page();
+            return;
+        }
+
         $instance = new $class();
         $instance->action_index();
 //
@@ -74,12 +83,12 @@ class Route
 
     }
 
-//    static function ErrorPage404()
-//    {
-//        $host = 'http://'.$_SERVER['HTTP_HOST'].'/';
-//        header('HTTP/1.1 404 Not Found');
-//        header("Status: 404 Not Found");
-//        header('Location:'.$host.'404');
-//    }
+    static function ErrorPage404()
+    {
+        $host = 'http://'.$_SERVER['HTTP_HOST'].'/';
+        header('HTTP/1.1 404 Not Found');
+        header("Status: 404 Not Found");
+        header('Location:'.$host.'404');
+    }
 
 }
