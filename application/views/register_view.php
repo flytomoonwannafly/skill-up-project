@@ -28,10 +28,10 @@
 </div>
 
 <?php if($data){ extract($data); ?>
-    <?php if($is_register  == true){ ?>
+    <?php if($is_uniq  == true){ ?>
         <p style="color:green">Ви успішно зареєструвались.</p>
-    <?php } elseif($is_register == false) { ?>
-        <p style="color:red">Щось пішло не так.</p>
+    <?php } elseif($is_uniq == false) { ?>
+        <p style="color:red">Таке ім'я вже зареєстроване.</p>
         <?php
 
     }} ?>

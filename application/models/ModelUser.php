@@ -11,13 +11,25 @@ class ModelUser extends Model
         $db = new DB();
         $con=$db->connect();
 
+        $check_query = "SELECT COUNT(*) as count FROM Users WHERE user_name = ?";
+        $stmt = $con->prepare($check_query);
+        $stmt->bind_param("s", $login);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $count = $result->fetch_assoc()['count'];
+
+// Якщо користувач з таким логіном уже існує, повернути помилку
+        if ($count > 0) {
+            return false;
+        }
+
+
         $stmt = $con->prepare("INSERT INTO Users (user_name, password) VALUES (?, ?)");
         $stmt->bind_param('ss', $login, $password);
 
         $stmt->execute();
-        return true;
-
         $stmt->close();
+        return true;
     }
     public function auth($login, $password){
         $db = new DB();
@@ -28,15 +40,11 @@ class ModelUser extends Model
 
         $stmt->execute();
         $result = $stmt->get_result();
+        $stmt->close();
         if ($result->num_rows === 1) {
             return true;
         } else {
             return false;
         }
-
-        $stmt->close();
-
-
-
     }
 }
