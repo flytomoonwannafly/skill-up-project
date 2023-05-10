@@ -1,7 +1,5 @@
 <?php
 namespace Application\Core;
-
-use Application\Controller\Controller404;
 use Application\Controller\ControllerApplication;
 
 class Route
@@ -44,42 +42,19 @@ class Route
             include "application/models/".$model_file;
         }
 
-        // подцепляем файл с классом контроллера
-        $controller_file = $controller_name.'.php';
-//        $controller_path = "application/controllers/".$controller_file;
 
-        var_dump($controller_name);
-
-//        if(!class_exists($controller_path))
-//
-//        {
-//                        Route::ErrorPage404();
-//        }
 
         // создаем контроллер
         $class = '\Application\Controller\\'.$controller_name;
-        if(!class_exists($class)){
+
+        $instance = new $class();
+        if(!class_exists($class) or ((!empty($routes[2])) && (!is_callable(array($instance, $action_name))))){
             $class = new ControllerApplication();
             $class->wrong_page();
             return;
         }
 
-        $instance = new $class();
-        $instance->action_index();
-//
-//        $controller = new $controller_name;
-//        $action = $action_name;
-//
-//        if(method_exists($controller, $action))
-//        {
-//            // вызываем действие контроллера
-//            $controller->$action();
-//        }
-//        else
-//        {
-//            // здесь также разумнее было бы кинуть исключение
-//            Route::ErrorPage404();
-//        }
+        call_user_func(array($instance, $action_name));
 
     }
 
