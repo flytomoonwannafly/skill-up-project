@@ -19,8 +19,7 @@ class ControllerRegister extends Controller
             $login = $_POST['login'];
             $password = $_POST['password'];
             if (!empty($login) && !empty($password)) {
-                $this->model->register_user($login, $password);
-                $data['is_register'] = true;
+                $data['is_uniq'] = $this->model->register_user($login, $password);
             }
         }
         $this->view->generate('register_view.php', 'template_view.php', $data);
