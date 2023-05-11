@@ -42,8 +42,18 @@ class ModelUser extends Model
         $result = $stmt->get_result();
         $stmt->close();
         if ($result->num_rows === 1) {
+            $_SESSION['user_id'] = $result->fetch_array()['id'];
+//            header('Location: profile.php');
             return true;
         } else {
+            return false;
+        }
+    }
+    function is_user_logined(){
+        if(!empty($_SESSION['user_id'])){
+            return $_SESSION['user_id'];
+        }
+        else{
             return false;
         }
     }

@@ -15,7 +15,7 @@
 
     <!-- Кнопка "Додати новий нотаток" -->
     <div class="mb-3">
-        <a href="add_note.php" class="btn btn-primary">Додати новий нотаток</a>
+        <a href="/dashboarduser/display_form/" class="btn btn-primary">Додати новий нотаток</a>
     </div>
 
     <!-- Список нотатків -->
@@ -41,7 +41,7 @@
             <td>
                 <!-- Кнопки редагування та видалення -->
                 <a href="edit_note.php?id=1" class="btn btn-primary">Редагувати</a>
-                <a href="delete_note.php?id=1" class="btn btn-danger">Видалити</a>
+                <a href="/dashboarduser/delete_note/<?php echo $notes['id'] ?>" class="btn btn-danger">Видалити</a>
             </td>
             <?php
             };

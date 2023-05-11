@@ -25,7 +25,7 @@
 
 <?php if($data){ extract($data); ?>
 <?php if($is_logined  == true){ ?>
-        <p style="color:green">Авторизація пройшла успішно.</p>
+        <?php header("Location: /dashboarduser");?>
     <?php } elseif($is_logined == false) { ?>
         <p style="color:red">Логін і/чи пароль були введені не вірно.</p>
     <?php

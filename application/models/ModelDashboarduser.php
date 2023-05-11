@@ -35,5 +35,12 @@ class ModelDashboarduser extends Model{
         $con->close();
 
     }
+    public function create_note($user_id,$title, $content){
+        $con=$this->db->connect();
+        $stmt = $con->prepare("INSERT INTO Notes (user_id, title, content) VALUES (?, ?, ?)");
+        $stmt->bind_param('iss', $user_id,$title, $content);
+        $stmt->execute();
+        $stmt->close();
+    }
 
 }
