@@ -12,11 +12,19 @@
 <body>
 <div class="container">
     <h1>User Notes</h1>
+    <div class="row">
+        <div class="col">
+<!--            <button class="btn btn-primary float-start">Кнопка зліва</button>-->
+            <a href="/dashboarduser/display_form/" class="btn btn-primary float-start">Додати новий нотаток</a>
+        </div>
+        <div class="col">
+            <a href="/dashboarduser/logout/" class="btn btn-secondary float-end">Вийти</a>
+        </div>
 
     <!-- Кнопка "Додати новий нотаток" -->
-    <div class="mb-3">
-        <a href="/dashboarduser/display_form/" class="btn btn-primary">Додати новий нотаток</a>
-    </div>
+<!--    <div class="mb-3 right">-->
+<!--        <a href="/dashboarduser/display_form/" class="btn btn-primary">Додати новий нотаток</a>-->
+<!--    </div>-->
 
     <!-- Список нотатків -->
     <table class="table">

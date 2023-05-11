@@ -57,4 +57,12 @@ class ModelUser extends Model
             return false;
         }
     }
+    function logout(){
+        session_start();
+        session_destroy();
+
+        // Перенаправити користувача на іншу сторінку
+        header('Location: /');
+        exit();
+    }
 }

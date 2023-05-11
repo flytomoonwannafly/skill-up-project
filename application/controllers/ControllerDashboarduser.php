@@ -54,4 +54,8 @@
          $this->view->generate('create_new_note_view.php', 'template_view.php');
      }
 
+     public function action_logout(){
+         $this->usermodel->logout();
+     }
+
  }
