@@ -19,7 +19,14 @@ class ControllerLogin extends Controller {
 
             if(!empty($login) && !empty($password)) { // перевіряємо, чи заповнені поля логіну та пароля
 
-                $data['is_logined'] = $this->model->auth($login, $password);
+                $data = $this->model->auth($login, $password);
+                if($data == true){
+                    header("Location: /dashboarduser");
+                    exit();
+                }
+                else{
+                    $data['is_logined'] = false;
+                }
 
             }
         }

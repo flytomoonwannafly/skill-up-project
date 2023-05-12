@@ -43,7 +43,6 @@ class ModelUser extends Model
         $stmt->close();
         if ($result->num_rows === 1) {
             $_SESSION['user_id'] = $result->fetch_array()['id'];
-//            header('Location: profile.php');
             return true;
         } else {
             return false;
@@ -57,8 +56,16 @@ class ModelUser extends Model
             return false;
         }
     }
+
+    function check_logined()
+    {
+        if(!($user_id = $this->is_user_logined())){
+            header("Location: /login");
+            exit();
+        }
+        return $user_id;
+    }
     function logout(){
-        session_start();
         session_destroy();
 
         // Перенаправити користувача на іншу сторінку

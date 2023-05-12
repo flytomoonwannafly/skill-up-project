@@ -4,7 +4,7 @@ namespace Application\Model;
 use Application\Component\DB;
 use Application\Core\Model;
 
-class ModelDashboarduser extends Model{
+class ModelNote extends Model{
 
     public function __construct()
     {
