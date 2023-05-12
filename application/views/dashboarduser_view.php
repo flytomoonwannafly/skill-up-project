@@ -7,6 +7,9 @@
 <body>
 <div class="container">
     <h1>User Notes</h1>
+    <h2><?php
+        echo 'Hello' .' '. $_SESSION['user_name'];
+        ?></h2>
     <div class="row">
         <div class="col">
             <a href="/dashboarduser/display_form/" class="btn btn-primary float-start">Додати новий нотаток</a>
