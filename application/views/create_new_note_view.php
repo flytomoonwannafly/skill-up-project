@@ -4,7 +4,7 @@
     <input type="text" name="content" placeholder="Контент">
     <!-- Інші поля форми -->
 
-    <button type="submit">Зберегти</button>
+    <button type="submit" name="submit">Зберегти</button>
 </form>
 
 

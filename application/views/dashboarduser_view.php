@@ -12,7 +12,7 @@
         ?></h2>
     <div class="row">
         <div class="col">
-            <a href="/dashboarduser/display_form/" class="btn btn-primary float-start">Додати новий нотаток</a>
+            <a href="/dashboarduser/create_note/" class="btn btn-primary float-start">Додати новий нотаток</a>
         </div>
         <div class="col">
             <a href="/dashboarduser/logout/" class="btn btn-secondary float-end">Вийти</a>

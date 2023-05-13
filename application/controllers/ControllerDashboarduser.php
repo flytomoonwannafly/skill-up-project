@@ -29,6 +29,8 @@
      }
      public function action_create_note(){
         $user_id = $this->usermodel->check_logined();
+        $this->view->generate('create_new_note_view.php', 'template_view.php');
+        if(isset($_POST['submit'])) {
         $title = $_POST['title'];
         $content = $_POST['content'];
         if (!empty($title) && !empty($content)) {
@@ -36,11 +38,7 @@
             header("Location: /dashboarduser");
             exit();
          }
-     }
-     public function action_display_form() {
-         $this->usermodel->check_logined();
-         $this->view->generate('create_new_note_view.php', 'template_view.php');
-     }
+     }}
 
      public function action_logout(){
          $this->usermodel->logout();
