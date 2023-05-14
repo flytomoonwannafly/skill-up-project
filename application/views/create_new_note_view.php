@@ -6,8 +6,3 @@
 
     <button type="submit" name="submit">Зберегти</button>
 </form>
-
-
-
-
-

@@ -1,8 +1,11 @@
 <?php
+
 namespace Application\Controller;
+
 use Application\Core\Controller;
 use Application\Model\ModelUser;
 use Application\Core\View;
+
 class ControllerRegister extends Controller
 {
 

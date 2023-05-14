@@ -13,7 +13,8 @@
                         </div>
                         <div class="form-group">
                             <label for="password">Пароль</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Введіть пароль">
+                            <input type="password" class="form-control" id="password" name="password"
+                                   placeholder="Введіть пароль">
                         </div>
                         <button type="submit" name='btn' class="btn btn-primary btn-block">Увійти</button>
                     </form>
@@ -23,8 +24,10 @@
     </div>
 </div>
 
-<?php if($data){ extract($data); ?>
-<?php if($is_logined == false) { ?>
+<?php if ($data) {
+    extract($data); ?>
+    <?php if ($is_logined == false) { ?>
         <p style="color:red">Логін і/чи пароль були введені не вірно.</p>
-    <?php
-}} ?>
+        <?php
+    }
+} ?>

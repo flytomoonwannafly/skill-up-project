@@ -2,9 +2,10 @@
 
 namespace Application\Component;
 include 'application/Config/db.configs.php';
+
 class DB
 {
-        public function connect()
+    public function connect()
     {
         $host = HOST;
         $user = USER;

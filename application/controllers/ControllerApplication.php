@@ -1,6 +1,7 @@
 <?php
 
 namespace Application\Controller;
+
 use Application\Core\Controller;
 
 class ControllerApplication extends Controller
@@ -9,7 +10,9 @@ class ControllerApplication extends Controller
     {
         $this->view->generate('main_view.php', 'template_view.php');
     }
-    function wrong_page(){
+
+    function wrong_page()
+    {
         $this->view->generate('404_view.php', 'template_view.php');
     }
 }
