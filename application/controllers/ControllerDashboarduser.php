@@ -39,6 +39,22 @@
             exit();
          }
      }}
+     public function action_update_note(){
+         $user_id = $this->usermodel->check_logined();
+         $pars = explode('/', $_SERVER['REQUEST_URI']);
+         $id = $pars[3];
+         $data = $this->modelnote->show_note($id);
+         $this->view->generate('update_note_view.php', 'template_view.php', $data);
+         if(isset($_POST['submit'])) {
+             $title = $_POST['title'];
+             $content = $_POST['content'];
+             if (!empty($title) && !empty($content)) {
+                 $this->modelnote->update_note($title, $content, $id);
+                 header("Location: /dashboarduser");
+                 exit();
+             }
+         }
+     }
 
      public function action_logout(){
          $this->usermodel->logout();

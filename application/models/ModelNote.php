@@ -42,5 +42,37 @@ class ModelNote extends Model{
         $stmt->execute();
         $stmt->close();
     }
+    public function show_note($id){
+        $con=$this->db->connect();
+        // Показати окремий нотаток за його айді
 
+        $sel_query = "SELECT * FROM Notes WHERE id = ?";
+        $stmt = $con->prepare($sel_query);
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+        return $result->fetch_array();
+    }
+    public function update_note($title, $content, $id){
+        $con=$this->db->connect();
+
+        // Підготовка запиту з параметрами
+        $query = "UPDATE Notes SET title = ?, content = ? WHERE id = ?";
+        $stmt = $con->prepare($query);
+        $stmt->bind_param('ssi', $title, $content, $id);
+
+// Виконання запиту
+        $stmt->execute();
+        $stmt->close();
+
+//// Перевірка успішності виконання запиту
+//        if ($stmt->affected_rows > 0) {
+//            // Запит виконано успішно
+//            echo "Запис оновлено.";
+//        } else {
+//            // Помилка при виконанні запиту
+//            echo "Помилка оновлення запису.";
+//        }
+    }
 }

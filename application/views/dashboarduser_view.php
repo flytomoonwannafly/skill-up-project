@@ -39,7 +39,7 @@
             <td><?php echo $notes['created_at']?>/<?php echo $notes['updated_at']?></td>
             <td>
                 <!-- Кнопки редагування та видалення -->
-                <a href="edit_note.php?id=1" class="btn btn-primary">Редагувати</a>
+                <a href="/dashboarduser/update_note/<?php echo $notes['id'] ?>" class="btn btn-primary">Редагувати</a>
                 <a href="/dashboarduser/delete_note/<?php echo $notes['id'] ?>" class="btn btn-danger">Видалити</a>
             </td>
             <?php
