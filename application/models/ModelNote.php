@@ -50,7 +50,7 @@ class ModelNote extends Model
         $stmt->close();
     }
 
-    public function show_note($id)
+    public function get_note_date($id)
     {
         $con = $this->db->connect();
         // Показати окремий нотаток за його айді

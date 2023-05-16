@@ -23,12 +23,10 @@ class ControllerDashboarduser extends Controller
         $this->view->generate('dashboarduser_view.php', 'template_view.php', $data);
     }
 
-    function action_delete_note()
+    function action_delete_note($id)
     {
         $this->usermodel->check_logined();
-        $pars = explode('/', $_SERVER['REQUEST_URI']);
-        $pars = $pars[3];
-        $this->modelnote->delete_note($pars);
+        $this->modelnote->delete_note($id);
         header("Location: /dashboarduser");
         exit();
     }
@@ -36,7 +34,7 @@ class ControllerDashboarduser extends Controller
     public function action_create_note()
     {
         $user_id = $this->usermodel->check_logined();
-        $this->view->generate('create_new_note_view.php', 'template_view.php');
+        $this->view->generate('form_note_view.php', 'template_view.php');
         if (isset($_POST['submit'])) {
             $title = $_POST['title'];
             $content = $_POST['content'];
@@ -48,13 +46,11 @@ class ControllerDashboarduser extends Controller
         }
     }
 
-    public function action_update_note()
+    public function action_update_note($id)
     {
         $user_id = $this->usermodel->check_logined();
-        $pars = explode('/', $_SERVER['REQUEST_URI']);
-        $id = $pars[3];
-        $data = $this->modelnote->show_note($id);
-        $this->view->generate('update_note_view.php', 'template_view.php', $data);
+        $data = $this->modelnote->get_note_date($id);
+        $this->view->generate('form_note_view.php', 'template_view.php', $data);
         if (isset($_POST['submit'])) {
             $title = $_POST['title'];
             $content = $_POST['content'];

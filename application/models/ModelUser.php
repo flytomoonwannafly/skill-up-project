@@ -45,8 +45,9 @@ class ModelUser extends Model
         $result = $stmt->get_result();
         $stmt->close();
         if ($result->num_rows === 1) {
-            $_SESSION['user_id'] = $result->fetch_array()['id'];
-            $_SESSION['user_name'] = $login;
+            $result_arr = $result->fetch_array();
+            $_SESSION['user_id'] = $result_arr['id'];
+            $_SESSION['user_name'] = $result_arr['user_name'];
             return true;
         } else {
             return false;

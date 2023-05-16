@@ -11,7 +11,7 @@ class ControllerApplication extends Controller
         $this->view->generate('main_view.php', 'template_view.php');
     }
 
-    function wrong_page()
+    function action_wrong_page()
     {
         $this->view->generate('404_view.php', 'template_view.php');
     }
