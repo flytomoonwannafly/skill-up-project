@@ -1,4 +1,5 @@
 <?php
+
 namespace Application\Core;
 class View
 {
@@ -13,6 +14,6 @@ class View
         }
         */
 
-        include 'application/views/'.$template_view;
+        include 'application/views/' . $template_view;
     }
 }

@@ -1,69 +1,45 @@
 <?php
+
 namespace Application\Core;
+
 use Application\Controller\ControllerApplication;
+
 
 class Route
 {
 
-    static function start()
+    public $routes = [];
+
+    public function __construct()
     {
-        // контроллер и действие по умолчанию
-        $controller_name = 'Application';
-        $action_name = 'index';
-
-        $routes = explode('/', $_SERVER['REQUEST_URI']);
-        // получаем имя контроллера
-        if ( !empty($routes[1]) )
-        {
-            $controller_name = $routes[1];
-        }
-        // получаем имя экшена
-        if ( !empty($routes[2]) )
-        {
-            $action_name = $routes[2];
-        }
-        // добавляем префиксы
-        $model_name = 'Model_'.$controller_name;
-        $controller_name = 'Controller'.ucfirst($controller_name);
-        $action_name = 'action_'.$action_name;
-
-        /*
-        echo "Model: $model_name <br>";
-        echo "Controller: $controller_name <br>";
-        echo "Action: $action_name <br>";
-        */
-
-        // подцепляем файл с классом модели (файла модели может и не быть)
-
-        $model_file = $model_name.'.php';
-        $model_path = "application/models/".$model_file;
-        if(file_exists($model_path))
-        {
-            include "application/models/".$model_file;
-        }
-
-
-
-        // создаем контроллер
-        $class = '\Application\Controller\\'.$controller_name;
-
-        $instance = new $class();
-        if(!class_exists($class) or ((!empty($routes[2])) && (!is_callable(array($instance, $action_name))))){
-            $class = new ControllerApplication();
-            $class->wrong_page();
-            return;
-        }
-
-        call_user_func(array($instance, $action_name));
-
+        $this->routes = require_once ROOT . '/Config/Routes.php';
     }
 
-    static function ErrorPage404()
+    public function start()
     {
-        $host = 'http://'.$_SERVER['HTTP_HOST'].'/';
-        header('HTTP/1.1 404 Not Found');
-        header("Status: 404 Not Found");
-        header('Location:'.$host.'404');
+        $is_uri_matched = false;
+        $uri = trim($_SERVER['REQUEST_URI'], '/');
+        foreach ($this->routes as $route => $handler) {
+            if (preg_match('~^' . $route . '$~', $uri)) {
+                $data = preg_replace('~^' . $route . '$~', $handler, $uri);
+
+                $data = explode('/', $data);
+                $controller_name = array_shift($data);
+                $action_name = array_shift($data);
+
+                $controller_name = 'Controller' . ucfirst($controller_name);
+                $action_name = 'action_' . $action_name;
+
+                // создаем контроллер
+                $class = '\Application\Controller\\' . $controller_name;
+                $instance = new $class();
+                call_user_func_array([$instance, $action_name], $data);
+                $is_uri_matched = true;
+            }
+        }
+        if ($is_uri_matched == false) {
+            header('Location: /404');
+        }
     }
 
 }
