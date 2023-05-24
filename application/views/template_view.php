@@ -28,8 +28,8 @@
 
             <ul class="nav nav-pills">
                 <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Головна</a></li>
-                <li class="nav-item"><a href="/user/login/" class="nav-link">Вхід</a></li>
-                <li class="nav-item"><a href="/user/register/" class="nav-link">Реєстрація</a></li>
+                <?php if(empty($_SESSION['user_id'])){?><li class="nav-item"><a href="/user/login/" class="nav-link">Вхід</a></li><?php }?>
+                <?php if(empty($_SESSION['user_id'])){?><li class="nav-item"><a href="/user/register/" class="nav-link">Реєстрація</a></li><?php }?>
                 <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">About</a></li>
             </ul>
