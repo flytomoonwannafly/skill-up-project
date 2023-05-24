@@ -34,7 +34,7 @@ class ControllerDashboarduser extends Controller
     public function action_create_note()
     {
         $user_id = $this->usermodel->check_logined();
-        $this->view->generate('form_note_view.php', 'template_view.php');
+        $this->view->generate('form_note_view.php');
         if (isset($_POST['submit'])) {
             $title = $_POST['title'];
             $content = $_POST['content'];
