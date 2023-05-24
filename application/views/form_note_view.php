@@ -9,14 +9,6 @@ if (empty($data)) {
     $content = $data['content'];
 }
 ?>
-
-<!--<form action="--><?php //echo $data_action; ?><!--" method="POST">-->
-<!--    <input type="text" name="title" placeholder="Заголовок" value="--><?php //echo $title ?><!--">-->
-<!--    <input type="text" name="content" placeholder="Контент" value="--><?php //echo $content ?><!--">-->
-<!---->
-<!--    <button type="submit" name="submit">Зберегти</button>-->
-<!--</form>-->
-
 <form action="<?php echo $data_action; ?>" method="POST">
     <div class="mb-3">
         <label for="title" class="form-label">Заголовок</label>
