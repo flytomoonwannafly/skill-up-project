@@ -7,11 +7,7 @@ class DB
 {
     public function connect()
     {
-        $host = HOST;
-        $user = USER;
-        $pass = PASS;
-        $db = DBNAME;
-        $connection = mysqli_connect($host, $user, $pass, $db);
+        $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
         return $connection;
     }
 
