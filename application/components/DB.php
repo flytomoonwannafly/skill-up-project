@@ -7,8 +7,20 @@ class DB
 {
     public function connect()
     {
-        $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-        return $connection;
+        try {
+            $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+            // Перевірка підключення до бази даних
+            if (!$connection) {
+                throw new Exception("Помилка підключення до бази даних");
+            }
+            return $connection;
+
+            mysqli_close($connection);
+        } catch (Exception $e) {
+            // Обробка помилки підключення до бази даних
+            echo "На жаль, виникла помилка: " . $e->getMessage();
+        }
     }
 
 }
