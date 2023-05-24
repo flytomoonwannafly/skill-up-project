@@ -10,11 +10,21 @@ if (empty($data)) {
 }
 ?>
 
-<form action="<?php echo $data_action; ?>" method="POST">
-    <!-- Ваші поля форми тут -->
-    <input type="text" name="title" placeholder="Заголовок" value="<?php echo $title ?>">
-    <input type="text" name="content" placeholder="Контент" value="<?php echo $content ?>">
-    <!-- Інші поля форми -->
+<!--<form action="--><?php //echo $data_action; ?><!--" method="POST">-->
+<!--    <input type="text" name="title" placeholder="Заголовок" value="--><?php //echo $title ?><!--">-->
+<!--    <input type="text" name="content" placeholder="Контент" value="--><?php //echo $content ?><!--">-->
+<!---->
+<!--    <button type="submit" name="submit">Зберегти</button>-->
+<!--</form>-->
 
-    <button type="submit" name="submit">Зберегти</button>
+<form action="<?php echo $data_action; ?>" method="POST">
+    <div class="mb-3">
+        <label for="title" class="form-label">Заголовок</label>
+        <input type="text" class="form-control" name="title" value="<?php echo $title ?>">
+    </div>
+    <div class="mb-3">
+        <label for="content" class="form-label">Контент</label>
+        <textarea class="form-control" name="content" rows="5"><?php echo $content ?></textarea>
+    </div>
+    <button type="submit" name="submit" class="btn btn-primary">Зберегти</button>
 </form>
