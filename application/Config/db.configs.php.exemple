@@ -2,8 +2,8 @@
 
 namespace Application\Config;
 
-define('HOST',  'server_name' );
-define('USER', 'user_name');
-define('PASS', 'your_password');
-define('DBNAME', 'db_name');
+define('DB_HOST',  'server_name' );
+define('DB_USER', 'user_name');
+define('DB_PASS', 'your_password');
+define('DB_NAME', 'db_name');
 ?>
