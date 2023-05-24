@@ -66,7 +66,7 @@ class ModelUser extends Model
     function check_logined()
     {
         if (!($user_id = $this->is_user_logined())) {
-            header("Location: /login");
+            header("Location: /user/login");
             exit();
         }
         return $user_id;

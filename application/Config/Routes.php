@@ -4,6 +4,7 @@ return[
     #
     '' => 'application/index',
     'user/login'=> 'login/index',
+    'dashboarduser/logout'=> 'dashboarduser/logout',
     'user/register' => 'register/index',
     '404' => 'application/wrong_page',
     'dashboarduser'=>'dashboarduser/index',
