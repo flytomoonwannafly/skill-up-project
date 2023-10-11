@@ -1,11 +1,19 @@
 {
-    "autoload": {
-        "psr-4": {
-            "Application\\Controller\\": "application/controllers",
-            "Application\\Component\\": "application/components",
-            "Application\\Model\\": "application/models",
-            "Application\\Core\\": "application/core"
-        }
-    },
-    "require": {}
+  "type": "project",
+  "require-dev": {
+    "codeception/codeception": "^4.1",
+    "codeception/module-phpbrowser": "^1.0.0",
+    "codeception/module-asserts": "^1.0.0",
+    "codeception/module-webdriver": "^1.4",
+    "codeception/module-rest": "^1.0.0",
+    "codeception/module-db": "^1.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Application\\Controller\\": "application/controllers",
+      "Application\\Component\\": "application/components",
+      "Application\\Model\\": "application/models",
+      "Application\\Core\\": "application/core"
+    }
+  }
 }
