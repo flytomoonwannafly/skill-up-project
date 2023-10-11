@@ -1,0 +1,73 @@
+name: Main CI Workflow
+on: pull_request
+
+jobs:
+  run_acceptance_tests:
+    name: Run acceptance tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP 8.0 and tools
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+          tools: composer, wp-cli
+      - name: Stop Conflicting Default Services
+        # 3306 port is used by default. https://github.com/mirromutth/mysql-action/issues/2#issuecomment-537763992
+        run: sudo service mysql stop
+      - name: Update /etc/hosts file
+        run: echo '127.0.0.1 application-dev.local www.application-dev.local' | sudo tee -a /etc/hosts
+      - shell: bash
+        # Set secret variables
+        env:
+          USER_NAME: ${{ secrets.USER_NAME }}
+          USER_TOKEN: ${{ secrets.USER_TOKEN }}
+
+        # Prepare and run Docker containers
+        run: git clone https://${{ secrets.USER_NAME }}:${{ secrets.USER_TOKEN }}@github.com/flytomoonwannafly/workflow.git
+      - name: Rename the 'workflowr' folder
+        run: mv workflow .env
+      - name: Pull submodules
+        run: git -C ./.env submodule update --init --recursive
+      - name: Copy laradock config files
+        run: cp -avr ./.env/laradock-config/. ./.env/laradock
+      - run: rm ./.env/laradock/.env && mv ./.env/laradock/.env-github ./.env/laradock/.env
+      - run: docker-compose --env-file ./.env/laradock/.env -f ./.env/laradock/docker-compose.yml up --build -d mysql
+      - run: docker-compose --env-file ./.env/laradock/.env -f ./.env/laradock/docker-compose.yml up -d apache2 workspace php-fpm
+      - name: Show Running Containers
+        run: docker ps
+
+      # Download WP core and pull dependencies
+      #скопіювати файл з конфігами бази данних
+      - name: Composer install (inside WP repository)
+        run: composer install
+      - name: Composer install (inside Docker repository)
+        run: composer install -d ./.env
+
+      # Comment some configs in the `acceptance.suite.yml` file #######
+      - run: sed -i 's/- kill/#- kill/' ./.env/tests/acceptance.suite.yml
+      - run: sed -i 's/- chromedriver --whitelisted-ips/#- chromedriver --whitelisted-ips/' ./.env/tests/acceptance.suite.yml
+
+      # Run acceptance tests
+      - name: Install Google Chrome & Web Driver
+        run: sudo bash ./.env/tests/ci/install.bash
+      - name: Codecept Init
+        run: php ./.env/vendor/bin/codecept bootstrap .env
+      - name: Run chromedriver in background
+        run: chromedriver --whitelisted-ips="" --url-base=/wd/hub &>/dev/null &
+      - name: Run tests
+        run: php ./.env/vendor/codeception/codeception/codecept run acceptance -c .env --html --colors --steps --env chrome -vvv
+
+        # Prepare artifacts and upload
+      - name: Parse Laradock logs
+        if: failure()
+        run: docker-compose --env-file ./.env/laradock/.env -f ./.env/laradock/docker-compose.yml logs php-fpm >> wp-content/laradock-php.log
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: tests-output
+          path: |
+            ./.env/tests/_output*
+            ./wp-content/laradock-php.log
