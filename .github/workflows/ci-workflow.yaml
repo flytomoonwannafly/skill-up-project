@@ -7,7 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
       - name: Setup PHP 8.0 and tools
         uses: shivammathur/setup-php@v2
         with:
@@ -26,7 +25,7 @@ jobs:
 
         # Prepare and run Docker containers
         run: git clone https://${{ secrets.USER_NAME }}:${{ secrets.USER_TOKEN }}@github.com/flytomoonwannafly/workflow.git
-      - name: Rename the 'workflowr' folder
+      - name: Rename the 'workflow' folder
         run: mv workflow .env
       - name: Pull submodules
         run: git -C ./.env submodule update --init --recursive
