@@ -38,6 +38,12 @@ jobs:
 
       # Download WP core and pull dependencies
       #скопіювати файл з конфігами бази данних
+      - name: Rename db.configs.php.example on db.configs.php
+        run: mv ./application/Config/db.configs.php.exemple ./application/Config/db.configs.php
+      - run: sed -i 's/server_name/mysql/' ./application/Config/db.configs.php
+      - run: sed -i 's/user_name/volodimyr/' ./application/Config/db.configs.php
+      - run: sed -i 's/your_password/volodimirim3/' ./application/Config/db.configs.php
+      - run: sed -i 's/db_name/SkillUp/' ./application/Config/db.configs.php
       - name: Composer install (inside WP repository)
         run: composer install
       - name: Composer install (inside Docker repository)
