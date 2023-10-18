@@ -16,7 +16,7 @@ jobs:
         # 3306 port is used by default. https://github.com/mirromutth/mysql-action/issues/2#issuecomment-537763992
         run: sudo service mysql stop
       - name: Update /etc/hosts file
-        run: echo '127.0.0.1 application-dev.local www.application-dev.local' | sudo tee -a /etc/hosts
+        run: echo '127.0.0.1 tester www.tester' | sudo tee -a /etc/hosts
       - shell: bash
         # Set secret variables
         env:
