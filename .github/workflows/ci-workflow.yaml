@@ -31,6 +31,7 @@ jobs:
         run: git -C ./.env submodule update --init --recursive
       - name: Copy laradock config files
         run: cp -avr ./.env/laradock-config/. ./.env/laradock
+      - run: ls ./.env/laradock  
       - run: docker-compose --env-file ./.env/laradock/.env -f ./.env/laradock/docker-compose.yml up --build -d mysql
       - run: docker-compose --env-file ./.env/laradock/.env -f ./.env/laradock/docker-compose.yml up -d apache2 workspace php-fpm
       - name: Show Running Containers
