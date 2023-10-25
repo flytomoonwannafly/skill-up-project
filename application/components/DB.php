@@ -12,12 +12,12 @@ class DB
 
             // Перевірка підключення до бази даних
             if (!$connection) {
-                throw new Exception("Помилка підключення до бази даних");
+                throw new \Exception("Помилка підключення до бази даних");
             }
             return $connection;
 
             mysqli_close($connection);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             // Обробка помилки підключення до бази даних
             echo "На жаль, виникла помилка: " . $e->getMessage();
         }
