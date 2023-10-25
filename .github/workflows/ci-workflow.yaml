@@ -32,8 +32,7 @@ jobs:
       - name: Copy laradock config files
         run: cp -avr ./.env/laradock-config/. ./.env/laradock
       - run: ls -a ./.env/laradock
-      - run: docker-compose --env-file ./.env/laradock/.env -f ./.env/laradock/docker-compose.yml up --build -d mysql
-      - run: docker-compose --env-file ./.env/laradock/.env -f ./.env/laradock/docker-compose.yml up -d apache2 workspace php-fpm
+      - run: docker-compose --env-file ./.env/laradock/.env -f ./.env/laradock/docker-compose.yml up --build -d mysql apache2 workspace php-fpm
       - name: Show Running Containers
         run: docker ps
 
@@ -41,10 +40,10 @@ jobs:
       #скопіювати файл з конфігами бази данних
       - name: Rename db.configs.php.example on db.configs.php
         run: mv ./application/Config/db.configs.php.exemple ./application/Config/db.configs.php
-      - run: sed -i 's/server_name/mysql/' ./application/Config/db.configs.php
-      - run: sed -i 's/user_name/volodimyr/' ./application/Config/db.configs.php
-      - run: sed -i 's/your_password/volodimirim3/' ./application/Config/db.configs.php
-      - run: sed -i 's/db_name/SkillUp/' ./application/Config/db.configs.php
+      - run: sed -i '' 's/server_name/mysql/' ./application/Config/db.configs.php
+      - run: sed -i '' 's/user_name/volodimyr/' ./application/Config/db.configs.php
+      - run: sed -i '' 's/your_password/volodimirim3/' ./application/Config/db.configs.php
+      - run: sed -i '' 's/db_name/SkillUp/' ./application/Config/db.configs.php
       - name: Composer install (inside WP repository)
         run: composer install
       - name: Composer install (inside Docker repository)
