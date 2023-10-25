@@ -48,8 +48,7 @@ jobs:
         run: composer install
       - name: Composer install (inside Docker repository)
         run: composer install -d ./.env
-      - run: ls -a ./application/
-      - run: ls -a ./application/Config
+      - run: ls -a ./
 
       # Comment some configs in the `acceptance.suite.yml` file #######
       - run: sed -i 's/- kill/#- kill/' ./.env/tests/acceptance.suite.yml
